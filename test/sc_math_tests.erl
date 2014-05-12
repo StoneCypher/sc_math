@@ -20,6 +20,17 @@ distance_test_() ->
         { "1.0 to -1.0",  ?_assert( 2.0 == sc_math:distance( 1.0, -1.0) ) },
         { "-1.0 to 1.0",  ?_assert( 2.0 == sc_math:distance(-1.0,  1.0) ) },
 
+        { "0.5 to 0.5",   ?_assert( 0.0 == sc_math:distance( 0.5,  0.5) ) },
+        { "1.5 to 1.5",   ?_assert( 0.0 == sc_math:distance( 1.5,  1.5) ) },
+        { "-1.5 to -1.5", ?_assert( 0.0 == sc_math:distance(-1.5, -1.5) ) },
+
+        { "0.5 to 1.5",   ?_assert( 1.0 == sc_math:distance( 0.5,  1.5) ) },
+        { "1.5 to 0.5",   ?_assert( 1.0 == sc_math:distance( 1.5,  0.5) ) },
+        { "0.5 to -1.5",  ?_assert( 2.0 == sc_math:distance( 0.5, -1.5) ) },
+        { "-1.5 to 0.5",  ?_assert( 2.0 == sc_math:distance(-1.5,  0.5) ) },
+        { "1.5 to -1.5",  ?_assert( 3.0 == sc_math:distance( 1.5, -1.5) ) },
+        { "-1.5 to 1.5",  ?_assert( 3.0 == sc_math:distance(-1.5,  1.5) ) },
+
         { "int distance is float",     ?_assert( 1.0 == sc_math:distance(1,   2  ) ) },
         { "float distance is float",   ?_assert( 1.0 == sc_math:distance(1.0, 2.0) ) },
         { "mixed distance 1 is float", ?_assert( 1.0 == sc_math:distance(1,   2.0) ) },
