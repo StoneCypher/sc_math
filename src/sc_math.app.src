@@ -1,5 +1,5 @@
 %% -*- mode: erlang -*-
-{application, example_project,
+{application, sc_math,
  [
   {description, "The sc_math free erlang mathematics library"},
   {vsn, "0.0.1"},
