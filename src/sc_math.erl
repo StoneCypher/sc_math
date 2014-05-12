@@ -7,9 +7,16 @@
 
 -export([
 
+    distance/2,
     eq_within/3
 
 ]).
+
+
+
+
+
+distance(X,Y) when is_number(X), is_number(Y) -> math:abs(X,Y).  % useful for handling non-numeric types later
 
 
 
