@@ -37,3 +37,15 @@ distance_test_() ->
         { "mixed distance 2 is float", ?_assert( 1.0 == sc_math:distance(1.0, 2  ) ) }
 
     ] }.
+
+
+
+
+eq_within_test_() ->
+
+    { "eq_within", [
+
+        { "true test",  ?_assert( true  == sc_math:eq_within(1.1, 1, 0.2)  ) },
+        { "false test", ?_assert( false == sc_math:eq_within(1.1, 1, 0.05) ) }
+
+    ] }.

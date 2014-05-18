@@ -1,4 +1,4 @@
 %% encoding: UTF-8
-{application,example_project}.
+{application,sc_math}.
 {packages,[]}.
-{modules,[example_project,sc_math]}.
+{modules,[sc_math]}.
