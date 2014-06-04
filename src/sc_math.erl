@@ -9,7 +9,8 @@
 
     distance/2,
     eq_within/3,
-    gcd/2
+    gcd/2,
+    lcm/2
 
 ]).
 
@@ -34,15 +35,23 @@ eq_within(X,Y, Dist) when is_number(X), is_number(Y), is_number(Dist) -> false.
 
 
 
-%% @doc Produces the greatest common divisor of two integers.
+%% @doc Produces the greatest common divisor of two positive integers.
 %%
 %% Why is by-zero undefined?  Because gcd divides both numbers then gcd must 
 %% not be larger than either number.  Because gcd is the denominator, then if 
 %% either number is zero, the denominator must not exceed zero, and therefore 
-%% must be zero.  Division by zero is undefined.  Therefore `gcd(0,_)' or
-%% `gcd(_,0)' must be undefined.
+%% must be zero.  Division by zero is undefined.  Therefore `gcd(0, _)' or
+%% `gcd(_, 0)' must be undefined.
 
 gcd(A, B) when A > 0, B > 0 -> gcd_i(A, B).
 
 gcd_i(A, 0) -> A;
 gcd_i(A, B) -> gcd_i(B, A rem B).
+
+
+
+
+
+%% @doc Produces the least common multiple of two integers.
+
+lcm(A, B) -> (A*B) div gcd(A, B).

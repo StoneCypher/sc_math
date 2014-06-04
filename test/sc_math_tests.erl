@@ -68,3 +68,18 @@ gcd_test_() ->
         { "7 9",  ?_assert( 1 == sc_math:gcd(7,9)  ) }
 
     ] }.
+
+
+
+
+
+lcm_test_() ->
+
+    { "lcm", [
+
+        { "8 12", ?_assert( 24 == sc_math:lcm(8,12) ) },
+        { "12 8", ?_assert( 24 == sc_math:lcm(12,8) ) },
+        { "1 3",  ?_assert(  3 == sc_math:lcm(1,3)  ) },
+        { "7 9",  ?_assert( 63 == sc_math:lcm(7,9)  ) }
+
+    ] }.
