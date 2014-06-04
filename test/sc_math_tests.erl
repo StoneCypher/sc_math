@@ -5,6 +5,10 @@
 -include_lib("proper/include/proper.hrl").
 -include_lib("eunit/include/eunit.hrl").
 
+
+
+
+
 distance_test_() ->
 
     { "distance/2 tests", [
@@ -47,5 +51,20 @@ eq_within_test_() ->
 
         { "true test",  ?_assert( true  == sc_math:eq_within(1.1, 1, 0.2)  ) },
         { "false test", ?_assert( false == sc_math:eq_within(1.1, 1, 0.05) ) }
+
+    ] }.
+
+
+
+
+
+gcd_test_() ->
+
+    { "gcd", [
+
+        { "8 12", ?_assert( 4 == sc_math:gcd(8,12) ) },
+        { "12 8", ?_assert( 4 == sc_math:gcd(12,8) ) },
+        { "1 3",  ?_assert( 1 == sc_math:gcd(1,3)  ) },
+        { "7 9",  ?_assert( 1 == sc_math:gcd(7,9)  ) }
 
     ] }.
