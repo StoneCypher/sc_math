@@ -83,3 +83,73 @@ lcm_test_() ->
         { "7 9",  ?_assert( 63 == sc_math:lcm(7,9)  ) }
 
     ] }.
+
+
+
+
+
+prop_ceil_ints_as_floats_identity() ->
+
+    ?FORALL( I,
+             proper_types:integer(),
+
+             sc_math:ceiling(I*1.0) =:= I
+
+    ).
+
+
+
+
+
+prop_ceil_floats_smaller_within_1() ->
+
+    ?FORALL( R,
+             proper_types:real(),
+
+             (sc_math:ceiling(R) - R) < 1 andalso (sc_math:ceiling(R) - R) >= 0
+
+           ).
+
+
+
+
+
+prop_ceil_always_gives_integers() ->
+
+    ?FORALL( N,
+             proper_types:number(),
+
+             is_integer(sc_math:ceiling(N))
+
+           ).
+
+
+
+
+
+ceil_test_() ->
+
+    { "Ceil/Ceiling tests", [
+
+        { "Manual value assertions", [
+
+            { "0.5",  ?_assert(  1 =:= sc_math:ceiling(0.5)  ) },
+            { "0",    ?_assert(  0 =:= sc_math:ceiling(0)    ) },
+            { "0.0",  ?_assert(  0 =:= sc_math:ceiling(0.0)  ) },
+            { "1.0",  ?_assert(  1 =:= sc_math:ceiling(1.0)  ) },
+            { "-1.0", ?_assert( -1 =:= sc_math:ceiling(-1.0) ) },
+            { "-1.5", ?_assert( -1 =:= sc_math:ceiling(-1.5) ) },
+            { "-1",   ?_assert( -1 =:= sc_math:ceiling(-1)   ) },
+            { "1",    ?_assert(  1 =:= sc_math:ceiling(1)    ) } 
+
+        ] },
+
+        { "Stochastic property assertions", [
+
+            { "All integers-as-floats are identity", ?_assert( true =:= proper:quickcheck(prop_ceil_ints_as_floats_identity()) ) },
+            { "All floats are smaller within 1",     ?_assert( true =:= proper:quickcheck(prop_ceil_floats_smaller_within_1()) ) },
+            { "All numbers give integer results",    ?_assert( true =:= proper:quickcheck(prop_ceil_always_gives_integers())   ) }
+
+        ] }
+
+    ] }.
