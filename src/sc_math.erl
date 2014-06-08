@@ -13,7 +13,9 @@
     lcm/2,
 
     ceiling/1,
-      ceil/1
+      ceil/1,
+
+    floor/1
 
 ]).
 
@@ -75,28 +77,28 @@ ceil(X) ->
 
 
 
-%% @doc <span style="color: green; font-weight: bold;">Tested</span> Returns the ceiling (round towards positive infinity) of a float. ```1> sc:ceil(0.5).
+%% @doc <span style="color: green; font-weight: bold;">Tested</span> Returns the ceiling (round towards positive infinity) of a float. ```1> sc_math:ceil(0.5).
 %% 1
 %%
-%% 2> sc:ceil(0).
+%% 2> sc_math:ceil(0).
 %% 0
 %%
-%% 3> sc:ceil(0.0).
+%% 3> sc_math:ceil(0.0).
 %% 0
 %%
-%% 4> sc:ceil(1.0).
+%% 4> sc_math:ceil(1.0).
 %% 1
 %%
-%% 5> sc:ceil(-1.0).
+%% 5> sc_math:ceil(-1.0).
 %% -1
 %%
-%% 6> sc:ceil(-1.5).
+%% 6> sc_math:ceil(-1.5).
 %% -1
 %%
-%% 7> sc:ceil(-1).
+%% 7> sc_math:ceil(-1).
 %% -1
 %%
-%% 8> sc:ceil(1).
+%% 8> sc_math:ceil(1).
 %% 1'''
 %%
 %% Unit, doc and stochastic property (int as float identity; float always smaller within 1; all results integers) tested.
@@ -124,3 +126,57 @@ ceiling(X) ->
         _   -> T + 1
 
     end.
+
+
+
+
+
+-spec floor(X :: number()) -> integer().
+
+%% @doc <span style="color: green; font-weight: bold;">Tested</span> Takes the floor (round towards negative infinity) of a number.  This is different than `erlang:trunc/1', which removes the mantissa, in its
+%% handling of negative numbers: trunc diminishes towards zero, not towards negative infinity (note examples 6 and 7 below.) ```1> sc_math:floor(0.5).
+%% 0
+%%
+%% 2> sc_math:floor(0).
+%% 0
+%%
+%% 3> sc_math:floor(0.0).
+%% 0
+%%
+%% 4> sc_math:floor(1.0).
+%% 1
+%%
+%% 5> sc_math:floor(-1.0).
+%% -1
+%%
+%% 6> sc_math:floor(-1.5).
+%% -2
+%%
+%% 7> erlang:trunc(-1.5).
+%% -1
+%%
+%% 8> sc_math:floor(-1).
+%% -1
+%%
+%% 9> sc_math:floor(1).
+%% 1'''
+%%
+%% Unit, doc and stochastic property (int as float identity; float always larger within 1; all results integers) tested.
+
+floor(X) when X < 0 ->
+
+    TruncX = trunc(X),
+
+    case X - TruncX of
+        0   -> TruncX;
+        0.0 -> TruncX;
+        _   -> TruncX - 1
+    end;
+
+
+
+
+
+floor(X) ->
+
+    trunc(X).

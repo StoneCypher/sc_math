@@ -153,3 +153,73 @@ ceil_test_() ->
         ] }
 
     ] }.
+
+
+
+
+
+prop_floor_ints_as_floats_identity() ->
+
+    ?FORALL( I,
+             proper_types:int(),
+
+             sc_math:floor(I*1.0) =:= I
+
+           ).
+
+
+
+
+
+prop_floor_floats_larger_within_1() ->
+
+    ?FORALL( R,
+             proper_types:real(),
+
+             (R - sc_math:floor(R)) < 1 andalso (R - sc_math:floor(R)) >= 0
+
+           ).
+
+
+
+
+
+prop_floor_always_gives_integers() ->
+
+    ?FORALL( N,
+             proper_types:number(),
+
+             is_integer(sc_math:floor(N))
+
+           ).
+
+
+
+
+
+floor_test_() ->
+
+    { "Floor tests", [
+
+        { "Manual value assertions", [
+
+            {"0.5",  ?_assert(  0 =:= sc_math:floor(0.5)  ) },
+            {"0",    ?_assert(  0 =:= sc_math:floor(0)    ) },
+            {"0.0",  ?_assert(  0 =:= sc_math:floor(0.0)  ) },
+            {"1.0",  ?_assert(  1 =:= sc_math:floor(1.0)  ) },
+            {"-1.0", ?_assert( -1 =:= sc_math:floor(-1.0) ) },
+            {"-1.5", ?_assert( -2 =:= sc_math:floor(-1.5) ) },
+            {"-1",   ?_assert( -1 =:= sc_math:floor(-1)   ) },
+            {"1",    ?_assert(  1 =:= sc_math:floor(1)    ) }
+
+        ] },
+
+        { "Stochastic property assertions", [
+
+            {"All integers-as-floats are identity", ?_assert( true =:= proper:quickcheck(prop_floor_ints_as_floats_identity()) ) },
+            {"All floats are larger within 1",      ?_assert( true =:= proper:quickcheck(prop_floor_floats_larger_within_1())  ) },
+            {"All numbers give integer results",    ?_assert( true =:= proper:quickcheck(prop_floor_always_gives_integers())   ) }
+
+        ] }
+
+    ] }.
