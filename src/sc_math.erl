@@ -26,6 +26,22 @@
 
 
 
+-export_type([
+
+    numeric_list/0
+
+]).
+
+
+
+
+
+-type numeric_list() :: [ number() ]. %% All members of a numeric list must be number()s.
+
+
+
+
+
 %% @doc Returns the distance between two values; currently numeric only.
 
 distance(X,Y) when is_number(X), is_number(Y) -> float(abs(X-Y)).  % useful for handling non-numeric types later
