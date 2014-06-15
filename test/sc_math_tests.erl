@@ -227,7 +227,7 @@ floor_test_() ->
 
 
 
-    
+
 prop_extrema_min_max_are_members() ->
 
     ?FORALL( L,
@@ -258,5 +258,20 @@ extrema_test_() ->
 
         {"Stochastic: min/max are members",         ?_assert( true =:= proper:quickcheck(prop_extrema_min_max_are_members()) ) },
         {"Stochastic error: not a list type error", ?_assertError(function_clause, sc_math:extrema([]) ) }
+
+    ] }.
+
+
+
+
+
+list_product_test_() ->
+
+    { "List product tests", [
+
+        {"[1,2,3]",   ?_assert(6    =:= sc_math:list_product([1,2,3]))},
+        {"[1,2,5.4]", ?_assert(10.8 =:= sc_math:list_product([1,2,5.4]))},
+        {"[1]",       ?_assert(1    =:= sc_math:list_product([1]))},
+        {"[]",        ?_assert(1    =:= sc_math:list_product([]))}
 
     ] }.
