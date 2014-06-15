@@ -14,8 +14,9 @@
 
     ceiling/1,
       ceil/1,
+    floor/1,
 
-    floor/1
+    extrema/1
 
 ]).
 
