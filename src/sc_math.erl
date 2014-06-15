@@ -16,7 +16,9 @@
       ceil/1,
     floor/1,
 
-    extrema/1
+    extrema/1,
+
+    list_product/1
 
 ]).
 
@@ -223,3 +225,34 @@ extrema([First | _] = List)
     end,
 
     lists:foldl(Next, {First,First}, List).
+
+
+
+
+
+%% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Takes the product of all numbers in the list.  Offered mostly to make dependant code clearer. ```1> sc:list_product([1,2,5.4]).
+%% 10.8'''
+
+-spec list_product(A::numeric_list()) -> number().
+
+list_product(List)
+
+    when is_list(List) ->
+
+    list_product(List, 1).
+
+
+
+
+
+list_product([], Counter) ->
+
+    Counter;
+
+
+
+
+
+list_product([Head|Tail], Counter) ->
+
+    list_product(Tail, Counter*Head).
