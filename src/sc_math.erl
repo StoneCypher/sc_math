@@ -131,8 +131,6 @@ ceiling(X) ->
 
 
 
--spec floor(X :: number()) -> integer().
-
 %% @doc <span style="color: green; font-weight: bold;">Tested</span> Takes the floor (round towards negative infinity) of a number.  This is different than `erlang:trunc/1', which removes the mantissa, in its
 %% handling of negative numbers: trunc diminishes towards zero, not towards negative infinity (note examples 6 and 7 below.) ```1> sc_math:floor(0.5).
 %% 0
@@ -163,6 +161,8 @@ ceiling(X) ->
 %%
 %% Unit, doc and stochastic property (int as float identity; float always larger within 1; all results integers) tested.
 
+-spec floor(X :: number()) -> integer().
+
 floor(X) when X < 0 ->
 
     TruncX = trunc(X),
@@ -180,3 +180,45 @@ floor(X) when X < 0 ->
 floor(X) ->
 
     trunc(X).
+
+
+
+
+
+
+%% @doc <span style="color: green; font-weight: bold;">Tested</span> Returns the lowest and highest values in a list of one or more member in the form `{Lo,Hi}'.  Undefined over the empty list.  Mixed-type safe; sorts according to type order rules.  ```1> sc_math:extrema([1,2,3,4]).
+%% {1,4}
+%%
+%% 2> sc_math:extrema([1,2,3,a,b,c]).
+%% {1,c}'''
+%%
+%% 3> sc_math:extrema( [] ).
+%% ** exception error: no function clause matching sc:extrema([])'''
+%%
+%% Unit, doc and stochastic (min and max are list members) tested.
+
+-spec extrema(List::list()) -> { Low::any(), Hi::any() }.
+
+extrema([First | _] = List)
+
+    when is_list(List) ->
+
+    Next = fun(Next,T) ->
+
+        {Lo, Hi} = T,
+
+        Lo2 = if
+            Next < Lo -> Next;
+            true      -> Lo
+        end,
+
+        Hi2 = if
+            Next > Hi -> Next;
+            true      -> Hi
+        end,
+
+        {Lo2, Hi2}
+
+    end,
+
+    lists:foldl(Next, {First,First}, List).
