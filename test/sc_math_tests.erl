@@ -285,12 +285,12 @@ range_scale_test_() ->
 
     { "Range scale tests", [
 
-        { "Example 1 - range",     ?_assert( 2.0  =:= sc:range_scale([3, 4, 5, 6])         ) },
-        { "Example 2 - bookends",  ?_assert( 2.0  =:= sc:range_scale([3, 6])               ) },
-        { "Example 3 - backwards", ?_assert( 2.0  =:= sc:range_scale([6, 5, 3])            ) },
-        { "Example 4 - float",     ?_assert( 2.5  =:= sc:range_scale([3, 4, 5, 6, 7, 7.5]) ) },
-        { "Example 5 - irregular", ?_assert( 33.0 =:= sc:range_scale([3, 10, 12, 99])      ) },
-        { "Example 6 - repeat",    ?_assert( 1.0  =:= sc:range_scale([3, 3, 3])            ) }
+        { "Example 1 - range",     ?_assert( 2.0  =:= sc_math:range_scale([3, 4, 5, 6])         ) },
+        { "Example 2 - bookends",  ?_assert( 2.0  =:= sc_math:range_scale([3, 6])               ) },
+        { "Example 3 - backwards", ?_assert( 2.0  =:= sc_math:range_scale([6, 5, 3])            ) },
+        { "Example 4 - float",     ?_assert( 2.5  =:= sc_math:range_scale([3, 4, 5, 6, 7, 7.5]) ) },
+        { "Example 5 - irregular", ?_assert( 33.0 =:= sc_math:range_scale([3, 10, 12, 99])      ) },
+        { "Example 6 - repeat",    ?_assert( 1.0  =:= sc_math:range_scale([3, 3, 3])            ) }
 
 % todo comeback add [1], [], stoch(list(number))
 

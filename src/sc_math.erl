@@ -279,22 +279,22 @@ list_product([Head|Tail], Counter) ->
 
 
 
-%% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Get the scale of a same-sign numeric range.  Gives nonsense results for non-numeric lists, or for lists which have both positive and negative members.  For a numeric list [4,5,6,12], the scale of the range 4..12 is 3:1, which is represented as 3.0 . ```1> sc:range_scale([3, 4, 5, 6]).
+%% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Get the scale of a same-sign numeric range.  Gives nonsense results for non-numeric lists, or for lists which have both positive and negative members.  For a numeric list [4,5,6,12], the scale of the range 4..12 is 3:1, which is represented as 3.0 . ```1> sc_math:range_scale([3, 4, 5, 6]).
 %% 2.0
 %%
-%% 2> sc:range_scale([3, 6]).
+%% 2> sc_math:range_scale([3, 6]).
 %% 2.0
 %%
-%% 3> sc:range_scale([6, 5, 3]).
+%% 3> sc_math:range_scale([6, 5, 3]).
 %% 2.0
 %%
-%% 4> sc:range_scale([3, 4, 5, 6, 7, 7.5]).
+%% 4> sc_math:range_scale([3, 4, 5, 6, 7, 7.5]).
 %% 2.5
 %%
-%% 5> sc:range_scale([3, 10, 12, 99]).
+%% 5> sc_math:range_scale([3, 10, 12, 99]).
 %% 33.0
 %%
-%% 6> sc:range_scale([3, 3, 3]).
+%% 6> sc_math:range_scale([3, 3, 3]).
 %% 1.0'''
 %%
 %% Unit and doc tested.
@@ -307,5 +307,5 @@ range_scale(Nums)
 
     when is_list(Nums) ->
 
-    {Lo, Hi} = sc:extrema(Nums),
+    {Lo, Hi} = sc_math:extrema(Nums),
     Hi/Lo.
