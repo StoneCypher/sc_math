@@ -292,6 +292,25 @@ range_scale_test_() ->
         { "Example 5 - irregular", ?_assert( 33.0 =:= sc_math:range_scale([3, 10, 12, 99])      ) },
         { "Example 6 - repeat",    ?_assert( 1.0  =:= sc_math:range_scale([3, 3, 3])            ) }
 
-% todo comeback add [1], [], stoch(list(number))
+% todo comeback add stoch
+
+    ] }.
+
+
+
+
+
+absolute_difference_test_() ->
+
+    { "Absolute difference tests", [
+
+        { "Example 1 - 1.25, 1", ?_assert( 0.25 =:= sc_math:absolute_difference(1.25, 1) ) },
+        { "Example 2 - 2, 1",    ?_assert( 1    =:= sc_math:absolute_difference(2, 1)    ) },
+        { "Example 3 - 1, 2",    ?_assert( 1    =:= sc_math:absolute_difference(1, 2)    ) },
+        { "Example 4 - 1, 1",    ?_assert( 0    =:= sc_math:absolute_difference(1, 1)    ) },
+        { "Example 5 - 1, -1",   ?_assert( 2    =:= sc_math:absolute_difference(1, -1)   ) },
+        { "Example 6 - 100, 35", ?_assert( 65   =:= sc_math:absolute_difference(100, 35) ) }
+
+% todo comeback add stoch
 
     ] }.

@@ -20,7 +20,9 @@
 
     list_product/1,
 
-    range_scale/1
+    range_scale/1,
+
+    absolute_difference/2
 
 ]).
 
@@ -214,7 +216,7 @@ floor(X) ->
 %% {1,c}'''
 %%
 %% 3> sc_math:extrema( [] ).
-%% ** exception error: no function clause matching sc:extrema([])'''
+%% ** exception error: no function clause matching sc_math:extrema([])'''
 %%
 %% Unit, doc and stochastic (min and max are list members) tested.
 
@@ -248,7 +250,7 @@ extrema([First | _] = List)
 
 
 
-%% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Takes the product of all numbers in the list.  Offered mostly to make dependant code clearer. ```1> sc:list_product([1,2,5.4]).
+%% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Takes the product of all numbers in the list.  Offered mostly to make dependant code clearer. ```1> sc_math:list_product([1,2,5.4]).
 %% 10.8'''
 
 -spec list_product(A::numeric_list()) -> number().
@@ -298,8 +300,6 @@ list_product([Head|Tail], Counter) ->
 %% 1.0'''
 %%
 %% Unit and doc tested.
-%%
-%% @since Version 479
 
 -spec range_scale(NumList::numeric_list()) -> number().
 
@@ -309,3 +309,33 @@ range_scale(Nums)
 
     {Lo, Hi} = sc_math:extrema(Nums),
     Hi/Lo.
+
+
+
+
+
+%% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Takes the absolute value of the difference between the two arguments.  Offered mostly to make dependant code clearer. ```1> sc_math:absolute_difference(1.25, 1).
+%% 0.25
+%%
+%% 2> sc_math:absolute_difference(2,1).
+%% 1
+%%
+%% 3> sc_math:absolute_difference(1,2).
+%% 1
+%%
+%% 4> sc_math:absolute_difference(1,1).
+%% 0
+%%
+%% 5> sc_math:absolute_difference(1,-1).
+%% 2
+%%
+%% 6> sc_math:absolute_difference(100,35).
+%% 65'''
+%%
+%% @since Version 504
+
+-spec absolute_difference(A::number(), B::number()) -> number().
+
+absolute_difference(A,B) ->
+
+    abs(A-B).
