@@ -5,10 +5,12 @@ Exactly what it sounds like: my math erlang library.  MIT licensed.
 
 
 
-Status
-------
+Status - `Usable`
+-----------------
 
-Not tested; mother approved.  Built on **should work** technology.  Will improve soon.
+The tests in here are reasonably solid.  Water's fine.
+
+
 
 
 
