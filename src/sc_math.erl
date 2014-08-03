@@ -16,8 +16,6 @@
       ceil/1,
     floor/1,
 
-    extrema/1,
-
     list_product/1,
 
     range_scale/1,
@@ -209,47 +207,6 @@ floor(X) ->
 
 
 
-%% @doc <span style="color: green; font-weight: bold;">Tested</span> Returns the lowest and highest values in a list of one or more member in the form `{Lo,Hi}'.  Undefined over the empty list.  Mixed-type safe; sorts according to type order rules.  ```1> sc_math:extrema([1,2,3,4]).
-%% {1,4}
-%%
-%% 2> sc_math:extrema([1,2,3,a,b,c]).
-%% {1,c}'''
-%%
-%% 3> sc_math:extrema( [] ).
-%% ** exception error: no function clause matching sc_math:extrema([])'''
-%%
-%% Unit, doc and stochastic (min and max are list members) tested.
-
--spec extrema(List::list()) -> { Low::any(), Hi::any() }.
-
-extrema([First | _] = List)
-
-    when is_list(List) ->
-
-    Next = fun(Next,T) ->
-
-        {Lo, Hi} = T,
-
-        Lo2 = if
-            Next < Lo -> Next;
-            true      -> Lo
-        end,
-
-        Hi2 = if
-            Next > Hi -> Next;
-            true      -> Hi
-        end,
-
-        {Lo2, Hi2}
-
-    end,
-
-    lists:foldl(Next, {First,First}, List).
-
-
-
-
-
 %% @doc <span style="color:orange;font-style:italic">Stoch untested</span> Takes the product of all numbers in the list.  Offered mostly to make dependant code clearer. ```1> sc_math:list_product([1,2,5.4]).
 %% 10.8'''
 
@@ -307,7 +264,7 @@ range_scale(Nums)
 
     when is_list(Nums) ->
 
-    {Lo, Hi} = sc_math:extrema(Nums),
+    {Lo, Hi} = sc_list:extrema(Nums),
     Hi/Lo.
 
 
